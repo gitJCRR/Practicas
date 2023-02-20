@@ -20,13 +20,19 @@ namespace Práctica2
         // botón que cierra la aplicación
         private void btnsalir_Click(object sender, EventArgs e)
         {
-            Close();
+            var tituloCuadro = "Confirmación de salida";
+            var mensajeCuadro = "¿Desea cerrar la aplicación?";
+
+            // cuadro Aceptar - Cancelar
+            var result = MessageBox.Show(mensajeCuadro, tituloCuadro, MessageBoxButtons.OKCancel);
+          
+            if(result == DialogResult.OK)
+            {
+                Close();
+            }
+            
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnsobre_Click(object sender, EventArgs e)
         {
@@ -78,6 +84,40 @@ namespace Práctica2
             {
                 txtdireccion.Focus();
             }
+        }
+
+        private void btnanadir_Click(object sender, EventArgs e)
+        {
+            if(txtidioma.Text != "")
+            {
+                clbIdiomas.Items.Add(txtidioma.Text);
+                txtidioma.Clear();
+            }
+            else
+            {
+                MessageBox.Show("El campo idioma está vacío.");
+            }
+            
+        }
+
+        private void btnborrar_Click(object sender, EventArgs e)
+        {
+            if (clbIdiomas.SelectedItems.Count > 0)
+            {
+                int x = clbIdiomas.SelectedIndex;
+                int indice = x + 1;
+                clbIdiomas.Items.RemoveAt(x);
+            }
+            else
+            {
+                MessageBox.Show("No ha seleccionado ningún idioma para borrar.");
+            }
+
+        }
+
+        private void btnborrarlista_Click(object sender, EventArgs e)
+        {
+            clbIdiomas.Items.Clear();
         }
     }
 }
